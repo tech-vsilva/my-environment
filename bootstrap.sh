@@ -4,7 +4,11 @@ set -x
 
 # https://askubuntu.com/a/98467
 is_installed() {
+<<<<<<< HEAD
     # dpkg -l "${1}" | return $?
+=======
+    dpkg -l "${1}" | grep -q ^ii && return 1
+>>>>>>> parent of ef09d8e... invert return status
     return 0
 }
 
