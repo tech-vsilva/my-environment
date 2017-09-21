@@ -2,9 +2,18 @@
 
 set -x
 
+# https://askubuntu.com/a/98467
+try_install() {
+    dpkg -l "${1}" | grep -q ^ii && return 1
+    sudo apt-get -y install "$@"
+    return 0
+}
+
 install_atom(){
-  sudo add-apt-repository -y ppa:webupd8team/atom \
-  && sudo apt-get update && sudo apt-get install -y atom
+  if try_install atom; then
+      sudo add-apt-repository -y ppa:webupd8team/atom \
+      && sudo apt-get update && sudo apt-get install -y atom
+  fi
 }
 
 install_google_chrome(){
@@ -15,5 +24,5 @@ install_google_chrome(){
 }
 
 sudo apt-get update \
-&& install_atom
+&& install_atom \
 && install_google_chrome
