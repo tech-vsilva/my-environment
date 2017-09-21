@@ -4,8 +4,8 @@ set -x
 
 # https://askubuntu.com/a/98467
 is_installed() {
-    dpkg -l "${1}" | grep -q ^ii && return 0
-    return 1
+    # dpkg -l "${1}" | return $?
+    return 0
 }
 
 install_atom(){
