@@ -55,13 +55,21 @@ install_spotify(){
   fi
 }
 
+install_vlc(){
+  if ! is_installed vlc; then
+    install vlc
+  fi
+}
+
 show_report(){
   cat "${REPORT}"
 }
 
 update
+
 install_atom
 install_google_chrome
 install_spotify
+install_vlc
 
 show_report
