@@ -2,60 +2,9 @@
 
 set -x
 
+install_atom(){
+  sudo add-apt-repository -y ppa:webupd8team/atom
+}
+
 sudo apt-get update \
-&& sudo apt-get install -y arj \
-  build-essential \
-  cabextract \
-  curl \
-  debconf-utils \
-  easytag \
-  ffmpeg \
-  file-roller \
-  filezilla \
-  gimp \
-  gimp-data \
-  gimp-data-extras \
-  gimp-plugin-registry \
-  git \
-  google-chrome-stable \
-  gstreamer1.0-libav \
-  gxine \
-  icedax \
-  id3tool \
-  lame \
-  libavcodec-extra \
-  libavcodec-extra \
-  libmad0 \
-  libxine2-ffmpeg \
-  lnav \
-  mpack \
-  mpg321 \
-  nautilus-script-audio-convert \
-  oracle-java8-installer \
-  python-pip \
-  python-dev \
-  p7zip-full \
-  p7zip-rar \
-  python-software-properties \
-  rar \
-  sharutils \
-  spotify-client \
-  sublime-text \
-  tagtool \
-  terminator \
-  ubuntu-make \
-  ubuntu-restricted-extras \
-  unace \
-  unity-tweak-tool \
-  unrar \
-  unzip \
-  uudeview \
-  vim \
-  vivacious-colors-gtk-dark \
-  vivacious-colors-gtk-light \
-  vivacious-unity-gtk-dark \
-  vivacious-unity-gtk-light \
-  vlc \
-  xclip \
-  wget \
-  zip \
+&& install_atom
