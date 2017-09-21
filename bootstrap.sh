@@ -7,7 +7,7 @@ update(){
 }
 
 install(){
-  sudo apt-get -qqy install "${1}" "$@"
+  sudo apt-get -qqy install "${1}"
 }
 
 # https://askubuntu.com/a/98467
