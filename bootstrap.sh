@@ -7,7 +7,7 @@ REPORT="${HOME}/bootstrap.txt"
 rm -f "${REPORT}"
 
 update(){
-  sudo apt-get update
+  sudo apt-get -qq update
 }
 
 report(){
