@@ -22,20 +22,22 @@ install(){
   fi
 }
 
+add_repo(){
+  sudo add-apt-repository -y "${1}"
+}
+
 # verify if a package is installed
 # return 0 if true, 1 if false
 # Also informs about it in a report
 is_installed() {
     dpkg -l "${1}" | grep -q ^ii \
     && report "${1} already installed, skipping." && return 0
-    # return
     return 1
 }
 
 install_atom(){
   if ! is_installed atom; then
-      sudo add-apt-repository -y ppa:webupd8team/atom \
-      && update && install atom
+      add_repo 'ppa:webupd8team/atom' && update && install atom
   fi
 }
 
@@ -57,7 +59,7 @@ install_spotify(){
 
 install_vlc(){
   if ! is_installed vlc; then
-    install vlc
+    add_repo 'ppa:videolan/stable-daily' && update && install vlc
   fi
 }
 
