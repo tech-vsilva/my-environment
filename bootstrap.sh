@@ -7,7 +7,7 @@ REPORT="${HOME}/bootstrap.txt"
 rm -f "${REPORT}"
 
 update(){
-  sudo apt-get -qq update
+  sudo apt-get -q update
 }
 
 report(){
@@ -63,6 +63,14 @@ install_vlc(){
   fi
 }
 
+install_java_8(){
+  if ! is_installed java; then
+    add_repo 'ppa:webupd8team/java' \
+    echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections \
+    && update && install oracle-java8-installer
+  fi
+}
+
 show_report(){
   cat "${REPORT}"
 }
@@ -73,5 +81,6 @@ install_atom
 install_google_chrome
 install_spotify
 install_vlc
+install_java_8
 
 show_report
