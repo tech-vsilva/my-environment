@@ -64,11 +64,46 @@ install_vlc(){
 }
 
 install_java_8(){
-  if ! is_installed java; then
+  if ! is_installed oracle-java8-installer; then
     add_repo 'ppa:webupd8team/java' \
     echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections \
     && update && install oracle-java8-installer
   fi
+}
+
+install_dev_packages(){
+  sudo apt-get install -y arj \
+  curl \
+  wget \
+  vim \
+  git \
+  build-essential \
+  python-pip \
+  python-dev \
+  python-software-properties \
+  && sudo pip install --upgrade pip
+}
+
+select_fastest_mirror(){
+  sudo apt-get install -y aria2 git
+  if ! [[ -f /usr/bin/apt-fast ]]; then
+    git clone https://github.com/ilikenwf/apt-fast /tmp/apt-fast
+    sudo cp /tmp/apt-fast/apt-fast /usr/bin
+    sudo chmod +x /usr/bin/apt-fast
+    sudo cp /tmp/apt-fast/apt-fast.conf /etc
+    rm -rf /tmp/apt-fast
+  fi
+  local country="${1}"
+  local mirrors = ""
+  curl --remote-name "http://mirrors.ubuntu.com/${country}.txt"
+  while read mirror; do
+     mirrors+="${mirror}, "
+  done < "${country}.txt"
+  # remove last ', ' characters
+  local mirrors_formatted=$(echo "$mirrors" |  sed 's/\(.*\), /\1/')
+  echo "MIRRORS=('$mirrors_formatted')"
+  rm -f "${country}.txt"
+  # sudo sed -i 's/http:\/\/us.archive.ubuntu.com\/ubuntu\//http:\/\/ubuntu.uberglobalmirror.com\/archive\//' /etc/apt/sources.list
 }
 
 show_report(){
@@ -76,11 +111,13 @@ show_report(){
 }
 
 update
+select_fastest_mirror 'DE'
 
-install_atom
-install_google_chrome
-install_spotify
-install_vlc
-install_java_8
+# install_atom
+# install_google_chrome
+# install_spotify
+# install_vlc
+# install_java_8
+# install_dev_packages
 
-show_report
+# show_report
