@@ -16,7 +16,7 @@ report(){
 
 install(){
   report "installing ${1}"
-  sudo apt-get -qqy install "${1}"
+  sudo apt-fast -y install "${1}"
   if is_installed "${1}"; then
     report "${1} installed successfully!"
   fi
@@ -72,7 +72,7 @@ install_java_8(){
 }
 
 install_dev_packages(){
-  sudo apt-get install -y arj \
+  sudo apt-fast install -y arj \
   curl \
   wget \
   vim \
@@ -101,9 +101,8 @@ select_fastest_mirror(){
   done < "${country}.txt"
   # remove last ', ' characters
   local mirrors_formatted=$(echo "$mirrors" |  sed 's/\(.*\), /\1/')
-  echo "MIRRORS=('$mirrors_formatted')"
+  echo "MIRRORS=('$mirrors_formatted')" | sudo tee -a /etc/apt-fast.conf
   rm -f "${country}.txt"
-  # sudo sed -i 's/http:\/\/us.archive.ubuntu.com\/ubuntu\//http:\/\/ubuntu.uberglobalmirror.com\/archive\//' /etc/apt/sources.list
 }
 
 show_report(){
@@ -113,11 +112,11 @@ show_report(){
 update
 select_fastest_mirror 'DE'
 
-# install_atom
-# install_google_chrome
-# install_spotify
-# install_vlc
-# install_java_8
-# install_dev_packages
+install_atom
+install_google_chrome
+install_spotify
+install_vlc
+install_java_8
+install_dev_packages
 
 # show_report
