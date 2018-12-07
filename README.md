@@ -2,10 +2,10 @@
 
 Development:
 ```
-curl -L https://rawgit.com/tech-vsilva/my-environment/master/bootstrap.sh | bash
+curl -L https://cdn.jsdelivr.net/gh/tech-vsilva/my-environment/bootstrap.sh | bash
 ```
 
 Production:
 ```
-curl -L https://cdn.rawgit.com/tech-vsilva/my-environment/master/bootstrap.sh | bash
+curl -L https://cdn.jsdelivr.net/gh/tech-vsilva/my-environment/bootstrap.sh | bash
 ```
